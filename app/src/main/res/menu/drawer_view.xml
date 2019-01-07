@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:enabled="true"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/FutureLog"
+            android:title="@string/future_log" />
+        <item
+            android:id="@+id/Collections"
+            android:title="@string/collections" />
+        <item
+            android:id="@+id/JournalPages"
+            android:title="@string/journal_pages" />
+
+        <item android:id="@+id/HabitTracker"
+            android:title="@string/habit_tracker"/>
+    </group>
+    <group
+        android:enabled="true"
+        android:checkableBehavior="single">
+        <item android:id="@+id/Profile"
+            android:title="@string/profile"/>
+        <item android:id="@+id/logOut"
+            android:title="@string/log_out"/>
+
+    </group>
+</menu>

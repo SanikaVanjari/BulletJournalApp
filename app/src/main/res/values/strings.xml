@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">BulletJournalApp</string>
+    <string name="enter_email">enter email</string>
+    <string name="enter_password">enter password</string>
+    <string name="login">LogIn</string>
+    <string name="register_new_user">Register new user</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="resend_verification_email">Resend Verification email</string>
+    <string name="enter_name">enter name</string>
+    <string name="enter_birth_date">enter birth date</string>
+    <string name="enter_phone_number">enter phone number</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="future_log">Future Log</string>
+    <string name="collections">Collections</string>
+    <string name="journal_pages">Journal Pages</string>
+    <string name="profile">Profile</string>
+    <string name="log_out">Log Out</string>
+    <string name="habit_tracker">Habit Tracker</string>
+</resources>
