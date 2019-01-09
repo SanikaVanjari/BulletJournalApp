@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "120777138182",
+    "firebase_url": "https://bulletjournalapp-a6f3a.firebaseio.com",
+    "project_id": "bulletjournalapp-a6f3a",
+    "storage_bucket": "bulletjournalapp-a6f3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120777138182:android:e21a4f4c3896e7b3",
+        "android_client_info": {
+          "package_name": "com.impetus.courses.bulletjournalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120777138182-lr6k8v4jmdsukmoe3l3sdjfp7gu50r8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUzO7HqGF4phc_XWrXZ6b1yzYOzDIvyMg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
