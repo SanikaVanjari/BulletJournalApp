@@ -49,7 +49,8 @@ public class HomeActivity extends AppCompatActivity {
                         // to be added
                         break;
                     case R.id.JournalPages:
-                        //to be added
+                        Intent intentToJournalPages= new Intent(HomeActivity.this,JournalPagesActivity.class);
+                        startActivity(intentToJournalPages);
                         break;
                     case R.id.logOut:
                         signOut();

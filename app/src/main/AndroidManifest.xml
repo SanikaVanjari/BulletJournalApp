@@ -11,6 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".EditJournalPagesActivity"></activity>
+        <activity android:name=".JournalPagesActivity" />
         <activity
             android:name=".LogInActivity"
             android:screenOrientation="portrait">
@@ -29,7 +31,7 @@
         <activity android:name=".FutureLogActivity" />
         <activity android:name=".CollectionsActivity" />
         <activity android:name=".EditCollectionsActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
     </application>
 
 </manifest>
