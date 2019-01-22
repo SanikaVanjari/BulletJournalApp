@@ -5,13 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".CollectionsActivity">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="141dp"
-        android:layout_marginEnd="85dp"
-        android:text="Collections" />
+    <GridView
+        android:id="@+id/CollectionGridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>

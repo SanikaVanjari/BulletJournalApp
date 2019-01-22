@@ -27,7 +27,9 @@
             android:name=".RegisterActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".FutureLogActivity" />
-        <activity android:name=".CollectionsActivity"></activity>
+        <activity android:name=".CollectionsActivity" />
+        <activity android:name=".EditCollectionsActivity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:id="@+id/nav_head"
         android:layout_height="wrap_content"
         android:text="My header title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>

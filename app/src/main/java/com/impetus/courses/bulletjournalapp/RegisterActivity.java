@@ -13,17 +13,25 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.impetus.courses.bulletjournalapp.models.User;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG="RegisterActivity";
     Button user_register;
-    EditText user_name,user_phone,user_DOB,user_email,user_password,user_confirm_password;
-    private FirebaseAuth firebaseAuth;
+    EditText user_name,user_phone,user_email,user_password,user_confirm_password;
+    EditText user_DOB;
+
     private ProgressBar mProgressBar;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +47,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         user_confirm_password=findViewById(R.id.userConfirmPassword);
         mProgressBar = findViewById(R.id.progressBar);
 
-        firebaseAuth=FirebaseAuth.getInstance();
-
         //onClick listeners
         user_register.setOnClickListener(this);
+
 
     }
 
@@ -80,9 +87,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * @param password
      */
     public void registerNewEmail(final String email, String password){
-
         showDialog();
-
+        final String phone = user_phone.getText().toString();
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -92,13 +98,37 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         if (task.isSuccessful()){
                             Log.d(TAG, "onComplete: AuthState: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
 
+
                             //send email verificaiton
                             sendVerificationEmail();
 
-                            FirebaseAuth.getInstance().signOut();
+                            User user=new User();
+                            user.setName(user_name.getText().toString());
+                            user.setEmail(email);
+                            user.setDob(user_DOB.getText().toString());
+                            user.getPhone();
+                            user.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                            //redirect the user to the login screen
-                            redirectLoginScreen();
+                            FirebaseDatabase.getInstance().getReference().child(getString(R.string.db_user))
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener
+                                    (new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    FirebaseAuth.getInstance().signOut();
+                                    //redirect the user to the login screen
+                                    redirectLoginScreen();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    FirebaseAuth.getInstance().signOut();
+                                    //redirect the user to the login screen
+                                    redirectLoginScreen();
+                                    Toast.makeText(getApplicationContext(),"Something went wrong..",Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+
                         }
                         if (!task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Unable to Register",
@@ -110,6 +140,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     }
                 });
     }
+
 
     /**
      * sends an email verification link to the user
