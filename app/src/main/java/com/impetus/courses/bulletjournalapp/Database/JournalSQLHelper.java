@@ -9,10 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class JournalSQLHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="bujo.db";
     public static final String TABLE_NAME="journal_table";
-    private static final int VERSION=3;
+    private static final int VERSION=4;
 
     public static final String TITLE="title";
     public static final String CONTENT="content";
+    public static final String DATE="date";
 
     public JournalSQLHelper( Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -21,7 +22,7 @@ public class JournalSQLHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
     db.execSQL("CREATE TABLE " + TABLE_NAME+ " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, "+ TITLE + " TEXT,"+
-            CONTENT+ " TEXT)");
+            CONTENT+ " TEXT," + DATE + " DATE )" );
     }
 
     @Override
@@ -30,11 +31,12 @@ public class JournalSQLHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertJournalData(String title, String content){
+    public boolean insertJournalData(String title, String content,String date){
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues contentValues= new ContentValues();
         contentValues.put(TITLE,title);
         contentValues.put(CONTENT,content);
+        contentValues.put(DATE,date);
         long result =db.insert(TABLE_NAME,null,contentValues);
         if(result==-1){
             return false;

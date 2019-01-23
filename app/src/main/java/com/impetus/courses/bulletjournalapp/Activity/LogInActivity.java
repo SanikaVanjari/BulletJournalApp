@@ -1,4 +1,4 @@
-package com.impetus.courses.bulletjournalapp;
+package com.impetus.courses.bulletjournalapp.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.impetus.courses.bulletjournalapp.R;
+import com.impetus.courses.bulletjournalapp.ResendVerificationDialog;
 
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
     Button logIn;

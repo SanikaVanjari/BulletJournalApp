@@ -11,10 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EditJournalPagesActivity"></activity>
-        <activity android:name=".JournalPagesActivity" />
+        <activity android:name=".EditJournalActivity"></activity>
+        <activity android:name=".Activity.EditCollectionActivity" />
+        <activity android:name=".Activity.SaveJournalPagesActivity" />
+        <activity android:name=".Activity.JournalPagesActivity" />
         <activity
-            android:name=".LogInActivity"
+            android:name=".Activity.LogInActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,15 +25,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".Activity.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activity.RegisterActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".FutureLogActivity" />
-        <activity android:name=".CollectionsActivity" />
-        <activity android:name=".EditCollectionsActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".Activity.FutureLogActivity" />
+        <activity android:name=".Activity.CollectionsActivity" />
+        <activity android:name=".Activity.SaveCollectionsActivity" />
+        <activity android:name=".Activity.ProfileActivity" />
     </application>
 
 </manifest>

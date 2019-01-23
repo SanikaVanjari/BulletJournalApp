@@ -1,4 +1,4 @@
-package com.impetus.courses.bulletjournalapp;
+package com.impetus.courses.bulletjournalapp.Activity;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.impetus.courses.bulletjournalapp.R;
 import com.impetus.courses.bulletjournalapp.models.User;
 
 public class ProfileActivity extends AppCompatActivity {

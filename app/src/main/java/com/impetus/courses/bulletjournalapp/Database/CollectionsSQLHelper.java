@@ -10,7 +10,7 @@ public class CollectionsSQLHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME="bujo.db";
     public static final String TABLE_NAME="collection_table";
-    private static final int VERSION=3;
+    private static final int VERSION=4;
 
     public static final String TITLE="title";
     public static final String CONTENT="content";

@@ -1,4 +1,4 @@
-package com.impetus.courses.bulletjournalapp;
+package com.impetus.courses.bulletjournalapp.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,12 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
+import com.impetus.courses.bulletjournalapp.R;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
