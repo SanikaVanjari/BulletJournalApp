@@ -7,14 +7,14 @@
     android:orientation="vertical"
     tools:context=".Activity.ProfileActivity">
 
-    <EditText
+    <TextView
         android:id="@+id/ProfileName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
 
-    <EditText
+    <TextView
         android:id="@+id/ProfilNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

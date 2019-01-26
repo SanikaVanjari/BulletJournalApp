@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
                 int id= menuItem.getItemId();
                 switch (id){
                     case R.id.FutureLog:
-                        Intent intentToFutureLog= new Intent(HomeActivity.this,FutureLogActivity.class);
+                        Intent intentToFutureLog= new Intent(HomeActivity.this,FutureLogMonthlyList.class);
                         startActivity(intentToFutureLog);
                         break;
                     case R.id.Collections:

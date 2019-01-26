@@ -11,10 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import com.impetus.courses.bulletjournalapp.Database.JournalSQLHelper;
-import com.impetus.courses.bulletjournalapp.EditJournalActivity;
 import com.impetus.courses.bulletjournalapp.R;
 
 import java.util.ArrayList;
@@ -76,12 +74,15 @@ public class JournalPagesActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if(item.getTitle()=="Edit"){
-
+            String id_journal= null;// add id value here
             Intent intent= new Intent(JournalPagesActivity.this, EditJournalActivity.class);
+            intent.putExtra("ID",id_journal);
             startActivity(intent);
+
         } else if(item.getTitle()=="Delete"){
-            database.execSQL(" DELETE FROM "+ JournalSQLHelper.TABLE_NAME + " WHERE ID = 2 " );
-            // HOW TO MAKE IT DISSAPEAR FROM THE LIST VIEW
+            String id_journal= null;// add id value here
+            database.execSQL(" DELETE FROM "+ JournalSQLHelper.TABLE_NAME + " WHERE ID = " + id_journal );
+            // HOW TO MAKE IT DISAPPEAR FROM THE LIST VIEW
         } else {
             return false;
         }

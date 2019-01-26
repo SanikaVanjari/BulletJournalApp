@@ -15,10 +15,10 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.impetus.courses.bulletjournalapp.Database.CollectionsSQLHelper;
+import com.impetus.courses.bulletjournalapp.Database.JournalSQLHelper;
 import com.impetus.courses.bulletjournalapp.R;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 public class CollectionsActivity extends AppCompatActivity {
@@ -86,13 +86,15 @@ public class CollectionsActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if(item.getTitle()=="Edit"){
-
-            Intent intent= new Intent(CollectionsActivity.this,EditCollectionActivity.class);
+            String id_journal= null;// add id value here
+            Intent intent= new Intent(CollectionsActivity.this, EditCollectionActivity.class);
+            intent.putExtra("ID",id_journal);
             startActivity(intent);
-        } else if(item.getTitle()=="Delete"){
-            Toast.makeText(getApplicationContext(),"value " ,Toast.LENGTH_LONG).show();
 
-//            database.execSQL("DELETE FROM "+ CollectionsSQLHelper.TABLE_NAME + "WHERE " + item.getTitle());
+        } else if(item.getTitle()=="Delete"){
+            String id_journal= null;// add id value here
+            database.execSQL(" DELETE FROM "+ JournalSQLHelper.TABLE_NAME + " WHERE ID = " + id_journal );
+            // HOW TO MAKE IT DISAPPEAR FROM THE LIST VIEW
         } else {
             return false;
         }

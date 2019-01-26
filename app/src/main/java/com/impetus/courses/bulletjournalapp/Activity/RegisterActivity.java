@@ -106,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             user.setName(user_name.getText().toString());
                             user.setEmail(email);
                             user.setDob(user_DOB.getText().toString());
-                            user.getPhone();
+                            user.setPhone(user_phone.getText().toString());
                             user.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                             FirebaseDatabase.getInstance().getReference().child(getString(R.string.db_user))

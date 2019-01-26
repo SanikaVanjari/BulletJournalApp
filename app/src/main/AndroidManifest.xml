@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EditJournalActivity"></activity>
+        <activity android:name=".Activity.FutureLogMonthlyList"></activity>
+        <activity android:name=".Activity.EditJournalActivity" />
         <activity android:name=".Activity.EditCollectionActivity" />
         <activity android:name=".Activity.SaveJournalPagesActivity" />
         <activity android:name=".Activity.JournalPagesActivity" />

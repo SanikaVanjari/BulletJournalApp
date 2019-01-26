@@ -18,7 +18,7 @@ import com.impetus.courses.bulletjournalapp.R;
 import com.impetus.courses.bulletjournalapp.models.User;
 
 public class ProfileActivity extends AppCompatActivity {
-    EditText p_name,p_phone;
+    TextView p_name,p_phone;
     TextView p_email;
     private static final String TAG="ProfileActivity";
 
