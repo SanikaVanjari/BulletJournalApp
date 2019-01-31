@@ -1,24 +1,39 @@
 package com.impetus.courses.bulletjournalapp.Activity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.impetus.courses.bulletjournalapp.Database.CollectionsSQLHelper;
+import com.impetus.courses.bulletjournalapp.Database.JournalSQLHelper;
 import com.impetus.courses.bulletjournalapp.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-
-
+    TextView CurrentDate,HomeToDoTitle,HomeToDoList,HabitTrackerTitle,HabitTrackerList,JournalTitleHome,JournalContentHome;
+    CardView ToDo,HabitTracker,Journal;
+    JournalSQLHelper helper;
+    SQLiteDatabase database;
     //Firebase
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -28,8 +43,27 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         drawerLayout=findViewById(R.id.drawer_layout);
-
         navigationView=findViewById(R.id.nav_view);
+        CurrentDate=findViewById(R.id.textView4);
+        HomeToDoTitle=findViewById(R.id.HomeTODOTitle);
+        HomeToDoList=findViewById(R.id.HomeTODOList);
+        HabitTrackerTitle=findViewById(R.id.HabitTrackerTitleHome);
+        HabitTrackerList=findViewById(R.id.HabitTrackerContentHome);
+        JournalTitleHome=findViewById(R.id.JournalTitle);
+        JournalContentHome=findViewById(R.id.JournalContentHome);
+        ToDo=findViewById(R.id.CardToDo);
+        HabitTracker=findViewById(R.id.CardHabitTracker);
+        Journal=findViewById(R.id.CardJournal);
+        helper=new JournalSQLHelper(this);
+        database= helper.getWritableDatabase();
+
+        // TO view current date
+        long date = System.currentTimeMillis();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM MM dd, yyyy h:mm a");
+        String dateString = sdf.format(date);
+        CurrentDate.setText(dateString);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -67,9 +101,20 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
-
         setupFirebaseAuth();
+//        viewJournalForCurrentDate();
 
+    }
+
+
+    private void viewJournalForCurrentDate() {
+        String[] params=new String[]{CurrentDate.getText().toString()};
+        Cursor c=database.rawQuery("SELECT " + JournalSQLHelper.CONTENT + " FROM "+ JournalSQLHelper.TABLE_NAME + " WHERE date = ?",params);
+        if (c.moveToNext()){
+            JournalContentHome.setText(c.getString(2));
+        } else {
+            JournalContentHome.setText(getString(R.string.no_journal_entry_warning));
+        }
     }
 
     /**
@@ -128,6 +173,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
     }
+
+
 
     @Override
     public void onStart() {
