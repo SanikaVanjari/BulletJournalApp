@@ -1,37 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".Activity.HomeActivity">
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        style="@style/Base.TextAppearance.AppCompat.Display1"
+        android:layout_height="wrap_content"
         android:text="Current data container" />
 
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-        
-        <FrameLayout
-            android:id="@+id/frame_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <android.support.design.widget.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:menu="@menu/drawer_view"
-            app:headerLayout="@layout/nav_header"
-            android:layout_gravity="start"/>
+    //Card view for TO-DO list
 
-    </android.support.v4.widget.DrawerLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_below="@id/textView4"
+        android:id="@+id/CardToDo"
+        android:layout_height="wrap_content">
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/HomeTODOTitle"
+            style="@style/Base.TextAppearance.AppCompat.Display1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TO-DO LIST"/>
+        <TextView
+            android:id="@+id/HomeTODOList"
+            android:layout_below="@id/HomeTODOTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="dummy holder for list"/>
+       </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    //Card view for Habit Tracker list
+
+    <android.support.v7.widget.CardView
+        android:layout_below="@id/CardToDo"
+        android:id="@+id/CardHabitTracker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.TextAppearance.AppCompat.Display1"
+                android:id="@+id/HabitTrackerTitleHome"
+                android:text="Habit tracker"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/HabitTrackerContentHome"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/HabitTrackerTitleHome"
+                android:text="dummy holder for Habit tracker"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    //Card view for Notes list
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CardJournal"
+        android:layout_below="@id/CardHabitTracker">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.TextAppearance.AppCompat.Display1"
+                android:id="@+id/JournalTitle"
+                android:text="Notes"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/JournalContentHome"
+                android:layout_below="@id/JournalTitle"
+                android:text="Dummmy to hold content"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
 </RelativeLayout>

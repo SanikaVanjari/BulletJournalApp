@@ -27,6 +27,7 @@ public class CollectionsActivity extends AppCompatActivity {
     SimpleAdapter adapter;
     CollectionsSQLHelper helper;
     SQLiteDatabase database;
+    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class CollectionsActivity extends AppCompatActivity {
         final ArrayList<HashMap<String,String>> arrayList= new ArrayList<>();
 
 
-        final Cursor cursor= helper.getAllData();
+        cursor = helper.getAllData();
         while (cursor.moveToNext()) {
             HashMap<String, String> hm = new HashMap<>();
             hm.put("title", cursor.getString(1));
@@ -86,15 +87,25 @@ public class CollectionsActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if(item.getTitle()=="Edit"){
-            String id_journal= null;// add id value here
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            int index = info.position;
+            cursor.moveToPosition(index);
             Intent intent= new Intent(CollectionsActivity.this, EditCollectionActivity.class);
-            intent.putExtra("ID",id_journal);
+            intent.putExtra("id",cursor.getString(0));
+            intent.putExtra("title", cursor.getString(1));
+            intent.putExtra("content", cursor.getString(2));
             startActivity(intent);
 
         } else if(item.getTitle()=="Delete"){
-            String id_journal= null;// add id value here
-            database.execSQL(" DELETE FROM "+ JournalSQLHelper.TABLE_NAME + " WHERE ID = " + id_journal );
-            // HOW TO MAKE IT DISAPPEAR FROM THE LIST VIEW
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            int index = info.position;
+            cursor.moveToPosition(index);
+            String ID_val=cursor.getString(0);
+            database.execSQL("DELETE FROM "+ helper.TABLE_NAME + " WHERE ID = ' " + ID_val + " ' " );
+            Toast.makeText(getApplicationContext(),"DATA DELETED : successfully",Toast.LENGTH_LONG).show();
+            Intent intent= new Intent(
+                    CollectionsActivity.this,CollectionsActivity.class);
+            startActivity(intent);
         } else {
             return false;
         }

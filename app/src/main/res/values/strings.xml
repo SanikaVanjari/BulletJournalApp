@@ -57,4 +57,5 @@
     <string name="db_user">users</string>
     <string name="db_collection">collection</string>
     <string name="dummy_data">Dummy Data</string>
+    <string name="no_journal_entry_warning">No journal entries present for today</string>
 </resources>

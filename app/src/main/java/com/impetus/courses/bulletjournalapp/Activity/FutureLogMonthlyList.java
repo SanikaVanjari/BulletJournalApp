@@ -14,25 +14,35 @@ import android.widget.Toast;
 
 import com.impetus.courses.bulletjournalapp.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class FutureLogMonthlyList extends AppCompatActivity {
     ListView monthlyLog;
-        ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_future_log_monthly_list);
-        final String[] months={"JAN 2019","FEB 2019", "MARCH 2019","APRIL 2019","MAY 2019","JUNE 2019","JULY 2019"};
         monthlyLog= findViewById(R.id.MonthsGridView);
-        adapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, months);
-        monthlyLog.setAdapter(adapter);
-                monthlyLog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        SimpleDateFormat dateFormat=new SimpleDateFormat("MMMM YYYY");
+        GregorianCalendar date=new GregorianCalendar();
+        final String[] dateArray=new String[12];
+
+        for(int day=0;day<12;day++){
+            dateArray[day]=dateFormat.format(date.getTime());
+            date.roll(Calendar.MONTH,true);
+        }
+
+        monthlyLog.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dateArray));
+        monthlyLog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent= new Intent(FutureLogMonthlyList.this,FutureLogActivity.class);
-                intent.putExtra("month",months[position]);
+                intent.putExtra("month",dateArray[position]);
                 startActivity(intent);
             }
         });
-
     }
 }

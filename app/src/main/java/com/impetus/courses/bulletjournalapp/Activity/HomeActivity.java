@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -28,8 +29,6 @@ import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
     TextView CurrentDate,HomeToDoTitle,HomeToDoList,HabitTrackerTitle,HabitTrackerList,JournalTitleHome,JournalContentHome;
     CardView ToDo,HabitTracker,Journal;
     JournalSQLHelper helper;
@@ -42,8 +41,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        drawerLayout=findViewById(R.id.drawer_layout);
-        navigationView=findViewById(R.id.nav_view);
         CurrentDate=findViewById(R.id.textView4);
         HomeToDoTitle=findViewById(R.id.HomeTODOTitle);
         HomeToDoList=findViewById(R.id.HomeTODOList);
@@ -63,44 +60,6 @@ public class HomeActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM MM dd, yyyy h:mm a");
         String dateString = sdf.format(date);
         CurrentDate.setText(dateString);
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id= menuItem.getItemId();
-                switch (id){
-                    case R.id.FutureLog:
-                        Intent intentToFutureLog= new Intent(HomeActivity.this,FutureLogMonthlyList.class);
-                        startActivity(intentToFutureLog);
-                        break;
-                    case R.id.Collections:
-                        Intent intentToCollections= new Intent(HomeActivity.this,CollectionsActivity.class);
-                        startActivity(intentToCollections);
-                        break;
-                    case R.id.HabitTracker:
-                        // to be added
-                        break;
-                    case R.id.JournalPages:
-                        Intent intentToJournalPages= new Intent(HomeActivity.this,JournalPagesActivity.class);
-                        startActivity(intentToJournalPages);
-                        break;
-                    case R.id.logOut:
-                        signOut();
-                        break;
-                    case R.id.Profile:
-                        Intent intentToProfile= new Intent(HomeActivity.this,ProfileActivity.class);
-                        startActivity(intentToProfile);
-                        break;
-                }
-
-                /*menuItem.setChecked(true);
-                Toast.makeText(HomeActivity.this," item selected" + menuItem.getTitle().toString(),Toast.LENGTH_LONG).show();
-                */
-                drawerLayout.closeDrawers();
-
-                return true;
-            }
-        });
         setupFirebaseAuth();
 //        viewJournalForCurrentDate();
 
@@ -187,6 +146,48 @@ public class HomeActivity extends AppCompatActivity {
         super.onStop();
         if (mAuthListener != null) {
             FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.drawer_view,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id= item.getItemId();
+        switch (id){
+            case R.id.FutureLog:
+                Intent intentToFutureLog= new Intent(HomeActivity.this,FutureLogMonthlyList.class);
+                startActivity(intentToFutureLog);
+                return true;
+            case R.id.Collections:
+                Intent intentToCollections= new Intent(HomeActivity.this,CollectionsActivity.class);
+                startActivity(intentToCollections);
+                return true;
+
+            case R.id.HabitTracker:
+                // to be added
+                return true;
+            case R.id.JournalPages:
+                Intent intentToJournalPages= new Intent(HomeActivity.this,JournalPagesActivity.class);
+                startActivity(intentToJournalPages);
+                return true;
+
+            case R.id.logOut:
+                signOut();
+                return true;
+
+            case R.id.Profile:
+                Intent intentToProfile= new Intent(HomeActivity.this,ProfileActivity.class);
+                startActivity(intentToProfile);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
         }
     }
 }
