@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.impetus.courses.bulletjournalapp.Database.JournalSQLHelper;
 import com.impetus.courses.bulletjournalapp.R;
@@ -18,6 +19,8 @@ public class EditJournalActivity extends AppCompatActivity {
     Button updateJ;
     JournalSQLHelper helper;
     SQLiteDatabase database;
+    String id_for_update;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,27 +29,36 @@ public class EditJournalActivity extends AppCompatActivity {
         editTitle=findViewById(R.id.editText7);
         editContent=findViewById(R.id.editText8);
         constantDate=findViewById(R.id.textView9);
+        updateJ=findViewById(R.id.button5);
+
         helper= new JournalSQLHelper(this);
         database= helper.getWritableDatabase();
-        Bundle bundle= getIntent().getExtras();
-        final String id= bundle.getString("ID");
+
+        Intent data =getIntent();
+        editTitle.setText(data.getStringExtra("title"));
+        editContent.setText(data.getStringExtra("content"));
+        constantDate.setText(data.getStringExtra("date"));
+        id_for_update = data.getStringExtra("id");
+
+
 
         updateJ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                database.execSQL("UPDATE " + JournalSQLHelper.TABLE_NAME + " SET title='" + editTitle.getText().toString()
-                        + "',content='" + editContent.getText().toString() +
-                        "' WHERE ID='" + Integer.parseInt(id) + "'");// need to add data
-                redirectToJournalPages();
+                if (editTitle.getText().toString().length()==0||editContent.getText().toString().length()==0){
+                    Toast.makeText(getApplicationContext(),"Enter all values",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    database.execSQL("UPDATE "+helper.TABLE_NAME+ " SET "+ helper.TITLE + " =' " + editTitle.getText().toString()+ "' ,"+ helper.CONTENT + " = ' "+
+                            editContent.getText().toString()+ " ' WHERE ID ='" + id_for_update+"'" );
+                    Toast.makeText(getApplicationContext(),"DATA UPDATED: successful",Toast.LENGTH_LONG).show();
+                    Intent intent= new Intent(
+                            EditJournalActivity.this,JournalPagesActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
 
-    }
-
-    public void redirectToJournalPages(){
-        Intent intent= new Intent(EditJournalActivity.this, JournalPagesActivity.class);
-        startActivity(intent);
-        finish();
     }
 }

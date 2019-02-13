@@ -9,8 +9,10 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.impetus.courses.bulletjournalapp.Database.JournalSQLHelper;
 import com.impetus.courses.bulletjournalapp.R;
@@ -23,6 +25,8 @@ public class JournalPagesActivity extends AppCompatActivity {
     JournalSQLHelper helper;
     SQLiteDatabase database;
     SimpleAdapter adapter;
+    private Cursor cursor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +37,13 @@ public class JournalPagesActivity extends AppCompatActivity {
         database= helper.getWritableDatabase();
 
         ArrayList<HashMap<String,String>>  arrayList=new ArrayList<>();
-        Cursor cursor=helper.getAllJournalData();
+        cursor = helper.getAllJournalData();
 
         while (cursor.moveToNext()){
             HashMap<String,String> hm= new HashMap<>();
-            hm.put("title",cursor.getString(1));
-            hm.put("content",cursor.getString(2));
-            hm.put("date",cursor.getString(3));
+            hm.put("title", cursor.getString(1));
+            hm.put("content", cursor.getString(2));
+            hm.put("date", cursor.getString(3));
             arrayList.add(hm);
         }
         String[] from={"title","content","date"};
@@ -74,15 +78,27 @@ public class JournalPagesActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if(item.getTitle()=="Edit"){
-            String id_journal= null;// add id value here
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            int index = info.position;
+            cursor.moveToPosition(index);
             Intent intent= new Intent(JournalPagesActivity.this, EditJournalActivity.class);
-            intent.putExtra("ID",id_journal);
+            intent.putExtra("id",cursor.getString(0));
+            intent.putExtra("title", cursor.getString(1));
+            intent.putExtra("content", cursor.getString(2));
+            intent.putExtra("date",cursor.getString(3));
             startActivity(intent);
 
         } else if(item.getTitle()=="Delete"){
-            String id_journal= null;// add id value here
-            database.execSQL(" DELETE FROM "+ JournalSQLHelper.TABLE_NAME + " WHERE ID = " + id_journal );
-            // HOW TO MAKE IT DISAPPEAR FROM THE LIST VIEW
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            int index = info.position;
+            cursor.moveToPosition(index);
+            String ID_val=cursor.getString(0);
+            database.execSQL("DELETE FROM "+ helper.TABLE_NAME + " WHERE ID = ' " + ID_val + " ' " );
+            Toast.makeText(getApplicationContext(),"DATA DELETED : successfully",Toast.LENGTH_LONG).show();
+            Intent intent= new Intent(
+                    JournalPagesActivity.this,JournalPagesActivity.class);
+            startActivity(intent);
+            finish();
         } else {
             return false;
         }
