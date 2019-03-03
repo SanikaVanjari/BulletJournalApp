@@ -20,55 +20,71 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_below="@id/FrameCalander"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/FrameCalander">
+        <TextView
+            android:id="@+id/Dateselected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/NoteCardDay"
+            style="@style/Base.TextAppearance.AppCompat.Display1"
+            android:text="DATE" />
         <android.support.v7.widget.CardView
             android:id="@+id/NoteCardDay"
-            android:layout_below="@id/ToDoPerDayCard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ToDoPerDayCard">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:id="@+id/notePerDayTitle"
-                    android:text="hi"
                     style="@style/Base.TextAppearance.AppCompat.Display2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="hi" />
+
                 <TextView
                     android:id="@+id/notePerDayContent"
-                    android:text="By"
-                    android:textSize="20sp"
-                    android:layout_below="@id/notePerDayTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/notePerDayTitle"
+                    android:text="By"
+                    android:textSize="20sp" />
 
             </RelativeLayout>
-            </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
+
         <android.support.v7.widget.CardView
             android:id="@+id/ToDoPerDayCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
-                    android:layout_width="match_parent"
                     android:id="@+id/ToDoDate"
                     style="@style/Base.TextAppearance.AppCompat.Display2"
-                    android:text="te"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="te" />
+
                 <TextView
                     android:id="@+id/ToDoContent"
-                    android:text="dy"
-                    android:textSize="20sp"
-                    android:layout_below="@id/ToDoDate"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ToDoDate"
+                    android:text="dy"
+                    android:textSize="20sp" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
-        </RelativeLayout>
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.impetus.courses.bulletjournalapp.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -57,11 +58,11 @@ public class HomeActivity extends AppCompatActivity {
         // TO view current date
         long date = System.currentTimeMillis();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM MM dd, yyyy h:mm a");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
         String dateString = sdf.format(date);
         CurrentDate.setText(dateString);
         setupFirebaseAuth();
-//        viewJournalForCurrentDate();
+        viewJournalForCurrentDate();
 
     }
 
@@ -71,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         Cursor c=database.rawQuery("SELECT " + JournalSQLHelper.CONTENT + " FROM "+ JournalSQLHelper.TABLE_NAME + " WHERE date = ?",params);
         if (c.moveToNext()){
             JournalContentHome.setText(c.getString(2));
+            c.close();
         } else {
             JournalContentHome.setText(getString(R.string.no_journal_entry_warning));
         }
@@ -183,6 +185,10 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.Profile:
                 Intent intentToProfile= new Intent(HomeActivity.this,ProfileActivity.class);
                 startActivity(intentToProfile);
+                return true;
+            case  R.id.ToDOList:
+                Intent intentToTODO= new Intent(HomeActivity.this, ToDoListActivity.class);
+                startActivity(intentToTODO);
                 return true;
 
             default:

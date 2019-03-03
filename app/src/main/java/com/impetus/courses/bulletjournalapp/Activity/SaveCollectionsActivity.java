@@ -5,8 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,5 +69,7 @@ database= helper.getWritableDatabase();
         database.close();
         helper.close();
     }
+
+
 }
 

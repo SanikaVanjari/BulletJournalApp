@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group>
+    <group
+        >
         <item
             android:id="@+id/FutureLog"
             android:title="@string/future_log" />
@@ -13,6 +14,9 @@
 
         <item android:id="@+id/HabitTracker"
             android:title="@string/habit_tracker"/>
+
+        <item android:id="@+id/ToDOList"
+            android:title="@string/to_do"/>
     </group>
     <group>
         <item android:id="@+id/Profile"

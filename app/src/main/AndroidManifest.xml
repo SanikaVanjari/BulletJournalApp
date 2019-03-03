@@ -10,23 +10,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        >
-        <activity android:name=".Activity.FutureLogMonthlyList"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activity.SaveToDoActivity" />
+        <activity android:name=".Activity.ToDoListActivity" />
+        <activity
+            android:name=".Activity.FutureLogMonthlyList"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activity.EditJournalActivity"
+        <activity
+            android:name=".Activity.EditJournalActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activity.EditCollectionActivity"
+        <activity
+            android:name=".Activity.EditCollectionActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activity.SaveJournalPagesActivity"
+        <activity
+            android:name=".Activity.SaveJournalPagesActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activity.JournalPagesActivity"
+        <activity
+            android:name=".Activity.JournalPagesActivity"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Activity.LogInActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -36,13 +42,17 @@
         <activity
             android:name=".Activity.RegisterActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.FutureLogActivity"
+        <activity
+            android:name=".Activity.FutureLogActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activity.CollectionsActivity"
+        <activity
+            android:name=".Activity.CollectionsActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activity.SaveCollectionsActivity"
+        <activity
+            android:name=".Activity.SaveCollectionsActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activity.ProfileActivity"
+        <activity
+            android:name=".Activity.ProfileActivity"
             tools:ignore="InnerclassSeparator" />
     </application>
 

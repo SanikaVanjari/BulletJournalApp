@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class JournalSQLHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="bujo.db";
     public static final String TABLE_NAME="journal_table";
-    private static final int VERSION=4;
+    private static final int VERSION=5;
 
     public static final String TITLE="title";
     public static final String CONTENT="content";

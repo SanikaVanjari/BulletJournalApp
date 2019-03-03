@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,21 +9,25 @@
 
     <TextView
         android:id="@+id/ProfileName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_alignParentTop="true"
+        style="@style/Base.TextAppearance.AppCompat.Display1"
         android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/ProfilNumber"
-        android:layout_width="match_parent"
+        android:layout_below="@id/ProfileName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
+        style="@style/Base.TextAppearance.AppCompat.Display1"
         android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/emailTV"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        style="@style/Base.TextAppearance.AppCompat.Display1"
+        android:layout_below="@id/ProfilNumber"
         android:layout_height="wrap_content" />
 
-</LinearLayout>
+</RelativeLayout>

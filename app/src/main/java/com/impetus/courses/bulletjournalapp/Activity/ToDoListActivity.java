@@ -3,8 +3,8 @@ package com.impetus.courses.bulletjournalapp.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,44 +14,45 @@ import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+
 import com.impetus.courses.bulletjournalapp.Database.JournalSQLHelper;
+import com.impetus.courses.bulletjournalapp.Database.ToDoListSQLHelper;
 import com.impetus.courses.bulletjournalapp.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class JournalPagesActivity extends AppCompatActivity {
-    GridView JournalGridView;
-    JournalSQLHelper helper;
+public  class ToDoListActivity extends AppCompatActivity {
+    GridView ToDOGridView;
+    ToDoListSQLHelper helper;
     SQLiteDatabase database;
     SimpleAdapter adapter;
     private Cursor cursor;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_journal_pages);
-
-        JournalGridView= findViewById(R.id.JournalGridView);
-        helper=new JournalSQLHelper(this);
+        setContentView(R.layout.activity_to_do_list);
+        ToDOGridView=findViewById(R.id.ToDoGridView);
+        helper=new ToDoListSQLHelper(this);
         database= helper.getWritableDatabase();
 
-        ArrayList<HashMap<String,String>>  arrayList=new ArrayList<>();
+        ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
         cursor = helper.getAllJournalData();
 
         while (cursor.moveToNext()){
             HashMap<String,String> hm= new HashMap<>();
-            hm.put("title", cursor.getString(1));
-            hm.put("content", cursor.getString(2));
-            hm.put("date", cursor.getString(3));
+            hm.put("content", cursor.getString(1));
+            hm.put("date", cursor.getString(2));
             arrayList.add(hm);
         }
-        String[] from={"title","content","date"};
-        int[] to={R.id.textView7,R.id.textView8,R.id.textView6};
+        String[] from={"content","date"};
+        int[] to={R.id.collectionContent,R.id.collectionTitle};
 
-        adapter= new SimpleAdapter(this,arrayList,R.layout.journal_view,from,to);
-        JournalGridView.setAdapter(adapter);
-        registerForContextMenu(JournalGridView);
+        adapter= new SimpleAdapter(this,arrayList,R.layout.collection_view,from,to);
+        ToDOGridView.setAdapter(adapter);
+        registerForContextMenu(ToDOGridView);
+
+
     }
 
     @Override
@@ -62,7 +63,7 @@ public class JournalPagesActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent= new Intent(this, SaveJournalPagesActivity.class);
+        Intent intent= new Intent(this, SaveToDoActivity.class);
         startActivity(intent);
         return true;
     }
@@ -81,11 +82,10 @@ public class JournalPagesActivity extends AppCompatActivity {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
             int index = info.position;
             cursor.moveToPosition(index);
-            Intent intent= new Intent(JournalPagesActivity.this, EditJournalActivity.class);
+            Intent intent= new Intent(ToDoListActivity.this, EditJournalActivity.class);//Add Edit TODOPage
             intent.putExtra("id",cursor.getString(0));
-            intent.putExtra("title", cursor.getString(1));
-            intent.putExtra("content", cursor.getString(2));
-            intent.putExtra("date",cursor.getString(3));
+            intent.putExtra("content", cursor.getString(1));
+            intent.putExtra("date",cursor.getString(2));
             startActivity(intent);
 
         } else if(item.getTitle()=="Delete"){
@@ -93,10 +93,10 @@ public class JournalPagesActivity extends AppCompatActivity {
             int index = info.position;
             cursor.moveToPosition(index);
             String ID_val=cursor.getString(0);
-            database.execSQL("DELETE FROM "+ helper.TABLE_NAME + " WHERE ID = ' " + ID_val + " ' " );
+            database.execSQL("DELETE FROM "+ ToDoListSQLHelper.TABLE_NAME + " WHERE ID = ' " + ID_val + " ' " );
             Toast.makeText(getApplicationContext(),"DATA DELETED : successfully",Toast.LENGTH_LONG).show();
-             Intent intent= new Intent(
-                    JournalPagesActivity.this,JournalPagesActivity.class);
+            Intent intent= new Intent(
+                    ToDoListActivity.this,ToDoListActivity.class);
             startActivity(intent);
             finish();
         } else {
